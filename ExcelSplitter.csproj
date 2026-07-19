@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>ExcelSplitter</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- NPOI supports both the legacy .xls (HSSF) and the modern .xlsx (XSSF) formats -->
+    <PackageReference Include="NPOI" Version="2.7.1" />
+  </ItemGroup>
+
+</Project>

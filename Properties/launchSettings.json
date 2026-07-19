@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ExcelSplitter": {
+      "commandName": "Project",
+      "commandLineArgs": "\"D:\\DTemp\\1_28576737467.xls\""
+    }
+  }
+}
