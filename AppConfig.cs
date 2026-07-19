@@ -42,7 +42,7 @@ namespace ExcelSplitter
         public string LogFolder { get; set; } = "";
 
         private const string ConfigFileName = "config.json";
-        private const decimal DefaultMaxAmount = 200_000_000m;
+        private const decimal DefaultMaxAmount = 2_000_000_000m;
 
         public static AppConfig LoadOrCreate(string baseDirectory, Logger logger)
         {

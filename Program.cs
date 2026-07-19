@@ -1,4 +1,5 @@
 using System;
+using Spectre.Console;
 
 namespace ExcelSplitter
 {
@@ -6,6 +7,7 @@ namespace ExcelSplitter
     {
         static int Main(string[] args)
         {
+            System.Console.OutputEncoding = System.Text.Encoding.UTF8;
             ShowIntro();
 
             string exeDir = AppContext.BaseDirectory;
@@ -28,6 +30,8 @@ namespace ExcelSplitter
 
                 var processor = new ExcelProcessor(config, logger);
                 int successCount = 0, failCount = 0;
+
+                Console.ForegroundColor = ConsoleColor.Green;
 
                 foreach (var inputPath in args)
                 {
@@ -59,44 +63,60 @@ namespace ExcelSplitter
             }
         }
 
-        private static void ShowIntro()
+static void ShowIntro()
+    {
+        AnsiConsole.Clear();
+
+        // Animated Figlet Logo
+        AnsiConsole.Write(
+            new FigletText("Excel Splitter")
+                .Centered()
+                .Color(Color.DeepSkyBlue1));
+
+        AnsiConsole.WriteLine();
+
+        // Nice Panel
+        var panel = new Panel(
+    @"[green]Automatically splits Excel rows larger than the configured amount.[/]
+
+[yellow]>>[/] Preserves Formatting
+[yellow]>>[/] Preserves Merged Cells
+[yellow]>>[/] Preserves Row Heights
+[yellow]>>[/] Supports XLS and XLSX
+[yellow]>>[/] Drag && Drop File Support
+
+[grey]Developer :[/] [lime]Shahab Sadeghi[/]
+[grey]Mobile    :[/] [aqua]09177388400[/]")
         {
-            var prevColor = Console.ForegroundColor;
+            Border = BoxBorder.Double,
+            Header = new PanelHeader("[bold yellow]Excel Amount Splitter[/]"),
+            BorderStyle = new Style(Color.DeepSkyBlue1)
+        };
 
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine(@"
-  _____                _        _                            _     _____       _ _ _   _            
- | ____|_  _____ ___| |      / \   _ __ ___   ___  _   _ _ __ | |_  / ___| _ __ | (_) |_| |_ ___ _ __ 
- |  _| \ \/ / __/ _ \ |     / _ \ | '_ ` _ \ / _ \| | | | '_ \| __| \___ \| '_ \| | | __| __/ _ \ '__|
- | |___ >  < (_|  __/ |    / ___ \| | | | | | (_) | |_| | | | | |_   ___) | |_) | | | |_| ||  __/ |   
- |_____/_/\_\___\___|_|   /_/   \_\_| |_| |_|\___/ \__,_|_| |_|\__| |____/| .__/|_|_|\__|\__\___|_|   
-                                                                           |_|                          ");
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("  " + new string('=', 100));
+        AnsiConsole.Write(panel);
 
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("   Excel Amount Splitter");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("   Automatically splits any payment row above a configured limit into multiple");
-            Console.WriteLine("   rows (each within the limit), while preserving the original file's formatting,");
-            Console.WriteLine("   merged cells, and row heights. Supports both legacy .xls and modern .xlsx files.");
+        AnsiConsole.WriteLine();
 
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("  " + new string('-', 100));
+        // Loading animation
+        AnsiConsole.Status()
+            .Spinner(Spinner.Known.Aesthetic)
+            .SpinnerStyle(Style.Parse("green"))
+            .Start("Loading components...", ctx =>
+            {
+                Thread.Sleep(1000);
+                ctx.Status("Initializing Excel Engine...");
+                Thread.Sleep(1100);
+                ctx.Status("Preparing...");
+                Thread.Sleep(800);
+            });
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("   Programmer: ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Shahab Sadeghi");
+        AnsiConsole.MarkupLine(
+            "[bold green]>> you must[/] Drag an Excel file onto this program.");
+    }
 
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("  " + new string('=', 100));
-            Console.WriteLine();
 
-            Console.ForegroundColor = prevColor;
-        }
 
-        private static void WaitForExit()
+    private static void WaitForExit()
         {
             Console.WriteLine("\nPress Enter to exit...");
             Console.ReadLine();

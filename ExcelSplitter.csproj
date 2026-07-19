@@ -11,6 +11,7 @@
   <ItemGroup>
     <!-- NPOI supports both the legacy .xls (HSSF) and the modern .xlsx (XSSF) formats -->
     <PackageReference Include="NPOI" Version="2.7.1" />
+    <PackageReference Include="Spectre.Console" Version="0.57.2" />
   </ItemGroup>
 
 </Project>
