@@ -79,11 +79,11 @@ static void ShowIntro()
         var panel = new Panel(
     @"[green]Automatically splits Excel rows larger than the configured amount.[/]
 
-[yellow]>>[/] Preserves Formatting
-[yellow]>>[/] Preserves Merged Cells
-[yellow]>>[/] Preserves Row Heights
-[yellow]>>[/] Supports XLS and XLSX
-[yellow]>>[/] Drag && Drop File Support
+[yellow]✓[/] Preserves Formatting
+[yellow]✓[/] Preserves Merged Cells
+[yellow]✓[/] Preserves Row Heights
+[yellow]✓[/] Supports XLS and XLSX
+[yellow]✓[/] Drag && Drop File Support
 
 [grey]Developer :[/] [lime]Shahab Sadeghi[/]
 [grey]Mobile    :[/] [aqua]09177388400[/]")
