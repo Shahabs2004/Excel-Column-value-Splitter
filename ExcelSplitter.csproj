@@ -1,17 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <AssemblyName>ExcelSplitter</AssemblyName>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net48</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyName>ExcelSplitter</AssemblyName>
+		<StartupObject>ExcelSplitter.Program</StartupObject>
 
-  <ItemGroup>
-    <!-- NPOI supports both the legacy .xls (HSSF) and the modern .xlsx (XSSF) formats -->
-    <PackageReference Include="NPOI" Version="2.7.1" />
-    <PackageReference Include="Spectre.Console" Version="0.57.2" />
-  </ItemGroup>
+		<!-- net48 از C# nullable/pattern-matching جدید فقط در سطح کامپایلر پشتیبانی می‌کند؛
+         این خط تضمین می‌کند Roslyn جدید (که با SDK جدید می‌آید) از ویژگی‌های C# 10 استفاده کند. -->
+		<LangVersion>latest</LangVersion>
+
+		<!-- app.config برای تنظیمات binding redirect به‌صورت خودکار توسط SDK تولید می‌شود -->
+		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- NPOI supports both the legacy .xls (HSSF) and the modern .xlsx (XSSF) formats -->
+		<PackageReference Include="NPOI" Version="2.7.1" />
+		<PackageReference Include="Spectre.Console" Version="0.57.2" />
+
+		<!-- System.Text.Json is built into the .NET 8 runtime but is NOT part of .NET Framework,
+         so it must be referenced explicitly as a NuGet package here. -->
+		<PackageReference Include="System.Text.Json" Version="8.0.5" />
+	</ItemGroup>
 
 </Project>
